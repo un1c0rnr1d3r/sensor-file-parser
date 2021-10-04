@@ -1,10 +1,39 @@
-# TSDX User Guide
+# Sensore File Parser
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+Parses and evaluates the contents of a sensor file provided as a string.
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+## Usage
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+To use in a plain JavaScript environment, run:
+`npm run build`
+
+This builds to `/dist`.
+
+The resulting JS file can be imported in plain JS using
+
+`import { evaluateLogFile } from './dist';`
+
+_or_
+
+`const evaluateLogFile = require('./dist').evaluateLogFile;`
+
+## Limitations
+
+Sensor reading date validation is extremely primitive. There is limited detection for invalid dates and times. If sensor data is repeated with the same date and time those erroneous readings will be included in the evaluation.
+
+Sensors with the same name but a different sensor type are not supported. This configuration will lead to unexpected behavior.
+
+Sensor readings are interpreted as floating point values. This may cause inaccurate results for very large or very small sensor readings. Certain values may not be able to be represented precisely in memory and will be rounded to the nearest floating point value. See <https://en.wikipedia.org/wiki/IEEE_754> for more information.
+
+## Design Suggestions
+
+Accepting the input as a readable stream would allow for batch processing and enable us to handle much larger files or streaming input from disparate data sources.
+
+Logging data for each sensor into a separate file would simplify parsing, prevent problems with multiple sensors writing to the file simultaneously, and potentially improve processing performance for very large files.
+
+Including the sensor type as well as the name in the output would prevent potential confusion if two different types of sensors happen to share the same name.
+
+Storing the sensor data in a relational, key-value, or document database could make it easier to manage incoming data from a large number of sensors and enable multiple clients to evaluate the sensor data separately before aggregating the results.
 
 ## Commands
 
@@ -87,17 +116,3 @@ You can also choose to install and use [invariant](https://github.com/palmerhq/t
 CJS, ESModules, and UMD module formats are supported.
 
 The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
-
-## Named Exports
-
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
-
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
