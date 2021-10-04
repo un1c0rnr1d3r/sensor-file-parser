@@ -5,7 +5,11 @@ Parses and evaluates the contents of a sensor file provided as a string.
 ## Usage
 
 To use in a plain JavaScript environment, run:
-`npm run build`
+
+```bash
+npm install
+npm run build
+```
 
 This builds to `/dist`.
 
@@ -23,7 +27,7 @@ Sensor reading date validation is extremely primitive. There is limited detectio
 
 Sensors with the same name but a different sensor type are not supported. This configuration will lead to unexpected behavior.
 
-Sensor readings are interpreted as floating point values. This may cause inaccurate results for very large or very small sensor readings. Certain values may not be able to be represented precisely in memory and will be rounded to the nearest floating point value. See <https://en.wikipedia.org/wiki/IEEE_754> for more information.
+Sensor readings are interpreted as floating point values. This may cause inaccurate results for very large or very small sensor readings. Certain values may not be able to be represented precisely in memory and will be rounded to the nearest floating point value. See [Wikipedia IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) for more information.
 
 ## Design Suggestions
 
@@ -34,6 +38,8 @@ Logging data for each sensor into a separate file would simplify parsing, preven
 Including the sensor type as well as the name in the output would prevent potential confusion if two different types of sensors happen to share the same name.
 
 Storing the sensor data in a relational, key-value, or document database could make it easier to manage incoming data from a large number of sensors and enable multiple clients to evaluate the sensor data separately before aggregating the results.
+
+Using a library such as [mathjs](https://www.npmjs.com/package/mathjs) could enable more precise interpretation of sensor readings and mitigate the floating point issues mentioned in the Limitations section.
 
 ## Commands
 
