@@ -1,4 +1,4 @@
-# Sensore File Parser
+# Sensor File Parser
 
 Parses and evaluates the contents of a sensor file provided as a string.
 
