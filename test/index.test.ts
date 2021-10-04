@@ -1,6 +1,7 @@
 import { evaluateLogFile } from '../src';
 import {
   example,
+  freezing,
   noisyData,
   noReadings,
   noReference,
@@ -89,6 +90,17 @@ describe('evaluateLogFile', () => {
       'hum-2': 'keep',
       'mon-1': 'discard',
       'mon-2': 'keep',
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  it('works with negative numbers', () => {
+    const actual = evaluateLogFile(freezing);
+    const expected = {
+      'temp-1': 'ultra precise',
+      'hum-1': 'keep',
+      'mon-1': 'keep',
     };
 
     expect(actual).toEqual(expected);
