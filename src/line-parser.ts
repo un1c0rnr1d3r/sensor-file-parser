@@ -1,4 +1,4 @@
-import { ErrorLine, Line, LineType, SensorType } from './model';
+import { ErrorLine, Line, LineType } from './model';
 import { Regex } from './regex';
 import { SensorLookup } from './sensor-lookup';
 
@@ -20,9 +20,6 @@ export class LineParser {
     const sensorMatches = this.line.match(Regex.Sensor);
     if (sensorMatches) {
       const sensorType = SensorLookup.get(sensorMatches[1]);
-      if (sensorType === SensorType.Unknown) {
-        return this.createErrorLine('Unrecognized sensor type.');
-      }
       return {
         name: sensorMatches[2],
         sensorType: sensorType,

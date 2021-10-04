@@ -28,6 +28,6 @@ export class SensorProcessor {
       case SensorType.Temperature:
         return TemperatureSensorProcessor.classify(this.sensorSummaries);
     }
-    invariant(false, `Unrecognized sensor type ${sensorType}.`);
+    return Classification.Indeterminate;
   }
 }

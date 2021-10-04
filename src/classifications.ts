@@ -1,6 +1,7 @@
 export enum Classification {
   Discard = 'discard',
   Keep = 'keep',
+  Indeterminate = 'indeterminate',
   Precise = 'precise',
   VeryPrecise = 'very precise',
   UltraPrecise = 'ultra precise',

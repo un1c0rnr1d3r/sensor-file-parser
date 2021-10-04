@@ -7,6 +7,7 @@ import {
   noReference,
   noSensor,
   repeatedIdentifiers,
+  unknownSensor,
   variableReference,
 } from '../fixture';
 
@@ -101,6 +102,21 @@ describe('evaluateLogFile', () => {
       'temp-1': 'ultra precise',
       'hum-1': 'keep',
       'mon-1': 'keep',
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  it('works with unrecognized sensors', () => {
+    const actual = evaluateLogFile(unknownSensor);
+    const expected = {
+      'temp-1': 'precise',
+      'temp-2': 'ultra precise',
+      'aq-1': 'indeterminate',
+      'hum-1': 'keep',
+      'hum-2': 'discard',
+      'mon-1': 'keep',
+      'mon-2': 'discard',
     };
 
     expect(actual).toEqual(expected);

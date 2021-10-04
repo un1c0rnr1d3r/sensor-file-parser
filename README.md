@@ -35,7 +35,7 @@ Accepting the input as a readable stream would allow for batch processing and en
 
 Logging data for each sensor into a separate file would simplify parsing, prevent problems with multiple sensors writing to the file simultaneously, and potentially improve processing performance for very large files.
 
-Including the sensor type as well as the name in the output would prevent potential confusion if two different types of sensors happen to share the same name.
+Modifying the output format to include an optional array of processing errors would improve error handling capabilites. Additionally, including the sensor type as well as the name in the output would prevent potential confusion if two different types of sensors happen to share the same name.
 
 Storing the sensor data in a relational, key-value, or document database could make it easier to manage incoming data from a large number of sensors and enable multiple clients to evaluate the sensor data separately before aggregating the results.
 
