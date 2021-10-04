@@ -50,7 +50,7 @@ export class TemperatureSensorProcessor {
   }
 
   private static standardDevication(readings: number[], mean: number) {
-    const squareDifferences = readings.map(value => {
+    const squareDifferences = readings.map((value) => {
       const difference = value - mean;
       const squareDifference = difference * difference;
       return squareDifference;
